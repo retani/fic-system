@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SUFF=mov
+LISTPATH=lists/
+OUTPATH=output/
+
+if [ $# -eq 0 ]
+  then
+    LIST=$LISTPATH'test.txt'
+  else
+    LIST=$LISTPATH$1'.txt'
+fi
+
+if [ $# -eq 1 ]
+  then
+    OUTPUT=$OUTPATH`basename -s .txt $LIST`.$SUFF
+  else
+    OUTPUT=$OUTPATH'test.'$SUFF
+fi
+
+echo listfile: $LIST
+echo outfile  : $OUTPUT
+
+#ffmpeg -f concat -safe 0 -i $LIST -filter_complex "[0:1][0:1]acrossfade=d=10" -vcodec copy -acodec aac $OUTPUT
+ffmpeg -f concat -safe 0 -i $LIST -c copy $OUTPUT

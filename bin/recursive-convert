@@ -1,0 +1,13 @@
+SUFF=mov
+ADD="-720"
+find . -maxdepth 3 -mindepth 1 -type f -name "*.$SUFF" -not -name "*$ADD.$SUFF" | while read file
+do
+    extension="${file##*.}"
+    filename="${file%.*}"    
+    outfile=$filename$ADD'.'$extension
+    echo -n FILE $file "->" $outfile
+    ffmpeg -y -loglevel panic -i "$file" -vf scale=1280:720 -crf 18 -c:a copy "$outfile" </dev/null
+    rm "$file"
+    mv "$outfile" "$file"
+    echo ...replaced
+done
