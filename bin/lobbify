@@ -1,0 +1,5 @@
+#!/bin/bash
+ffmpeg -i $1 -af "volumedetect" -f null /dev/null &>/tmp/fix_video_level
+LEVEL=`perl -n -e'/max_volume: -(.*)\./ && print $1' /tmp/fix_video_level`
+echo level:$LEVEL
+ffmpeg -i $1 -af "volume=$LEVELdB" -c:v copy -c:a aac -strict experimental -b:a 192k lobby-`basename $1`

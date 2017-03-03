@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "" >/tmp/fic_list.1080.txt
+
+for var in "$@"
+do
+    FILE=$(find `pwd`/clips/mov.1080 -name "$var*")
+    ENTRY=`echo file \'$FILE\'`
+    echo $ENTRY >>/tmp/fic_list.1080.txt
+done
+
+cat /tmp/fic_list.1080.txt
