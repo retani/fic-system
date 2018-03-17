@@ -27,5 +27,12 @@ hdiutil attach ffmpeg.dmg
 cp /Volumes/FFmpeg*/ffmpeg bin/
 rm ffmpeg.dmg
 
+echo "downloading clips (may take a while)..."
+curl --retry 10 http://playmaster.club/fic/clips.zip -O
+unzip clips
+rm clips.zip
+
 echo "running test conversion..."
 bin/make-show news1-monday-1900
+
+echo "DONE."
