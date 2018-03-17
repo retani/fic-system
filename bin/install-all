@@ -21,15 +21,11 @@ sudo ln -sf /Library/WebServer/Documents/media ./output
 echo "creating example..."
 printf "VT29 2019\nVT6\nVT18\nVT35" > shows/news1-monday-1900.txt
 
-echo "installing homebrew..."
-brew
-if [ "$?" -neq "0" ]
-  then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
 echo "installing ffmpeg..."
-brew install ffmpeg
+curl https://evermeet.cx/ffmpeg/ffmpeg-3.4.2.dmg -o ffmpeg.dmg
+hdiutil attach ffmpeg.dmg
+cp /Volumes/FFmpeg*/ffmpeg bin/
+rm ffmpeg.dmg
 
 echo "running test conversion..."
 bin/make-show news1-monday-1900

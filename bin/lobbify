@@ -1,4 +1,5 @@
 #!/bin/bash
+PATH=`pwd`/bin:$PATH
 ffmpeg -i $1 -af "volumedetect" -f null /dev/null &>/tmp/fix_video_level
 LEVEL=`perl -n -e'/max_volume: -(.*)\./ && print $1' /tmp/fix_video_level`
 echo level:$LEVEL

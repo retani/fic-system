@@ -21,5 +21,7 @@ fi
 echo listfile: $LIST
 echo outfile  : $OUTPUT
 
+PATH=`pwd`/bin:$PATH
+
 #ffmpeg -f concat -safe 0 -i $LIST -filter_complex "[0:1][0:1]acrossfade=d=10" -vcodec copy -acodec aac $OUTPUT
 ffmpeg -f concat -safe 0 -i $LIST -c copy $OUTPUT
