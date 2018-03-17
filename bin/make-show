@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+FILE=shows/$1.txt
+if [ ! -f $FILE ]; then
+    echo "$1 not found!"
+    echo "Available shows in shows/:"
+    echo
+    ls -1 shows/*.txt | sed 's#.*/##' | xargs basename -s .txt
+    echo
+    exit 1
+fi
+args=$(sed -e 's/^/"/g' -e 's/$/"/g' $FILE | tr '\n' ' ')
+eval bin/make-list $args > lists/$1.txt
+bin/concat $1

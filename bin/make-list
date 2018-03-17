@@ -1,12 +1,14 @@
 #!/bin/bash
 
-echo "" >/tmp/fic_list.1080.txt
+RES=1080
+
+echo "" >/tmp/fic_list.$RES.txt
 
 for var in "$@"
 do
-    FILE=$(find `pwd`/clips/mov.1080 -name "$var*")
+    FILE=$(find `pwd`/clips/mov.$RES -name "$var*")
     ENTRY=`echo file \'$FILE\'`
-    echo $ENTRY >>/tmp/fic_list.1080.txt
+    echo $ENTRY >>/tmp/fic_list.$RES.txt
 done
 
-cat /tmp/fic_list.1080.txt
+cat /tmp/fic_list.$RES.txt
